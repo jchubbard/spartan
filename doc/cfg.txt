@@ -1,0 +1,37 @@
+Stmts       -> Stmt ; $
+Stmt        -> Loop | Decl | Exprs | If
+Loop        -> While | For
+While       -> while ( Cond ) { Exprs }
+For         -> for ( Cond ) { Exprs }
+ForIn       -> ForSimp | ForNoDec | ForDec
+ForSimp     -> var, Valr
+ForNoDec    -> Cond ; Expr
+ForDec      -> DeclEx; ForNoDec
+Cond        -> bool | Expr
+Exprs       -> Expr | Expr ; Exprs | ;
+Expr        -> Func | Valr | BinExpr | UnExpr
+Func        -> func ( FuncIn )
+FuncIn      -> lambda | Valr | FuncInMul
+FuncInMul   -> Valr , FuncIn
+FuncInDef   -> lambda | DeclNo | FuncInDefMul
+FuncInDefMul-> DeclNo , FuncInDef
+Valr        -> val | var
+BinExpr     -> Valr BinOp Expr
+Op          -> Unop | BinOp | =
+UnOp        -> ++ | --
+BinOp       -> SimpOp | CompOp | ExtOp
+SimpOp      -> + | - | * | / | % | **
+CompOp      -> == | != | < | > | <= | >=
+ExtOp       -> += | -= | *= | /= | %= | **=
+UnExpr      -> Valr UnOp
+Decl        -> FuncDecl | DeclInst | DeclNone
+FuncDecl    -> FuncDeclNone | Type FuncDeclNone
+FuncDeclNone-> var ( FuncInDef ) { Exprs }
+DeclInst    -> DeclIm | DeclEx
+DeclIm      -> var = Expr
+DeclEx      -> DeclNone = Expr
+DeclNone    -> var ( Type )
+Type        -> SimpType | CompType
+SimpType    -> int | float | bool | string
+CompType    -> vector | enum | struct
+If          -> if ( Cond ) { Exprs }

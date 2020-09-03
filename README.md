@@ -1,4 +1,4 @@
-# Project SPARTAN
+# Project Spartan
 
 ### A simple, feature-poor, student programming language
 
